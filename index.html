@@ -9,6 +9,7 @@
 				const modal = document.querySelector('.modal');
 				const overlay = document.querySelector('.overlay');
 				const closeButton = document.querySelector('.btn-close');
+				const inbox = document.querySelector('.messages');
 				
 				// function for opening modal window for messages
 				const openModal = (e) => {
@@ -18,8 +19,7 @@
 					const modalBody = document.querySelector('#modal__body');
 
 					// console.log(e.target.id);
-					// console.log(geemails[e.target.id]);
-
+					
 					modalSubject.textContent = geemails[e.target.id].subject;
 					modalSender.textContent = geemails[e.target.id].sender;
 					modalDate.textContent = geemails[e.target.id].date.toLocaleDateString();
@@ -56,14 +56,15 @@
 					message.innerHTML = messageContent;
 					// message to reference message body in proper object
 					message.id = i;
-					document.querySelector('.messages').appendChild(message);
-
-					let messages = document.getElementsByClassName('message');
-
-					for (var i = 0; i < messages.length; i += 1) {
-						messages[i].addEventListener('click', openModal, false);	
-					}
+					console.log(message);
+					inbox.appendChild(message);
 					count += 1;
+				}
+
+				let messages = document.getElementsByClassName('message');
+
+				for (var i = 0; i < messages.length; i += 1) {
+					messages[i].addEventListener('click', openModal, false);	
 				}
 
 				setInterval(() => {
@@ -90,12 +91,8 @@
 					// message to reference message body in proper object
 					message.id = count;
 					document.querySelector('.messages').appendChild(message);
-					
-					let messages = document.getElementsByClassName('message');
 
-					for (var i = 0; i < messages.length; i += 1) {
-    				messages[i].addEventListener('click', openModal, false);	
-					}
+    			message.addEventListener('click', openModal, false);	
 
 					count += 1;
 					document.querySelector('.count').textContent = count;
@@ -132,6 +129,7 @@
 					</div>
 			</div>
 				<!-- /Modal -->
+				
 			<div class=top-header>
 				<img src="resources/img/gee-mail.png" alt="gee-mail logo" class="logo">
 				<p class="logo__type">Gee-mail</p>
