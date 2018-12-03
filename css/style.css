@@ -5,10 +5,21 @@
 }
 
 h2 {
-    font-weight: bold;
     font-size: 1em;
     margin: 20px 0px 20px 20px;
     display: inline-block;
+}
+
+h2,
+.count,
+.message p {
+    font-family: sans-serif;
+}
+
+h2,
+.count,
+.sender {
+    font-weight: bold;
 }
 
 p {
@@ -87,7 +98,7 @@ p {
 }
 
 .counter__header {
-    left: 45px;
+    left: 50px;
     top: 12px;
     margin: 0;
 }
@@ -95,7 +106,6 @@ p {
 .count {
     top: 12px;
     right: 20px;
-    font-weight: bold;
 }
 
 .inbox__sidebar__counter img {
@@ -147,5 +157,30 @@ p {
     width: 100%;
     display: block;
 }
+
+.message {
+    background: #f5f7f7;
+    height: 35px;
+    border-bottom: 1px solid #eceff1;
+}
+
+.message__content {
+    height: 30px;
+    padding: 9px 0px 5px 20px;
+}
+
+.message p {
+    color: #424242;
+}
+
+.date {
+    margin-right: 80px;
+}
+
+.sender {
+    margin-right: 160px;
+}
+
+
 
 
