@@ -4,8 +4,35 @@
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
       window.onload = function(){
-				// reference variable to keep track of number of messages in the inbox
+				// reference variables
 				let count = 0;
+				const modal = document.querySelector('.modal');
+				const overlay = document.querySelector('.overlay');
+				const closeButton = document.querySelector('.btn-close');
+				
+				// function for opening modal window for messages
+				const openModal = (e) => {
+					const modalSubject = document.querySelector('#modal__subject');
+					const modalSender = document.querySelector('.modal__sender');
+					const modalDate = document.querySelector('.modal__date');
+					const modalBody = document.querySelector('#modal__body');
+
+					// console.log(e.target.id);
+					// console.log(geemails[e.target.id]);
+
+					modalSubject.textContent = geemails[e.target.id].subject;
+					modalSender.textContent = geemails[e.target.id].sender;
+					modalDate.textContent = geemails[e.target.id].date.toLocaleDateString();
+					modalBody.textContent = geemails[e.target.id].body;
+
+					modal.style.display = "block";
+					overlay.style.display = "block";
+				};
+
+				const closeModal = () => {
+					modal.style.display = "none";
+					overlay.style.display = "none";
+				};
 
 				// Loops ten times, creating a DOM element each time 
 				// populates data from each object in geemails array
@@ -14,15 +41,15 @@
 					let message = document.createElement('div');
 					message.className = "message";
 					let messageContent = `
-						<div class="message__content">
+						<div class="message__content" id="${i}">
 							<div class="date">
-								<p>${geemails[i].date.toLocaleDateString()}</p>
+								<p id="${i}">${geemails[i].date.toLocaleDateString()}</p>
 							</div>
-							<div class="sender">
-								<p>${geemails[i].sender}</p>
+							<div class="sender" id="${i}">
+								<p id="${i}">${geemails[i].sender}</p>
 							</div>
-							<div class="subject">
-								<p>Subj: ${geemails[i].subject}</p>
+							<div class="subject" id="${i}">
+								<p id="${i}">Subj: ${geemails[i].subject}</p>
 							</div>
 						</div>
 					`
@@ -30,6 +57,12 @@
 					// message to reference message body in proper object
 					message.id = i;
 					document.querySelector('.messages').appendChild(message);
+
+					let messages = document.getElementsByClassName('message');
+
+					for (var i = 0; i < messages.length; i += 1) {
+						messages[i].addEventListener('click', openModal, false);	
+					}
 					count += 1;
 				}
 
@@ -41,15 +74,15 @@
 					let message = document.createElement('div');
 					message.className = "message";
 					let messageContent = `
-						<div class="message__content">
-							<div class="date">
-								<p>${geemails[count].date.toLocaleDateString()}</p>
+						<div class="message__content" id="${count}">
+							<div class="date" id="${count}">
+								<p id="${count}">${geemails[count].date.toLocaleDateString()}</p>
 							</div>
-							<div class="sender">
-								<p>${geemails[count].sender}</p>
+							<div class="sender" id="${count}">
+								<p id="${count}">${geemails[count].sender}</p>
 							</div>
-							<div class="subject">
-								<p>Subj: ${geemails[count].subject}</p>
+							<div class="subject" id="${count}">
+								<p id="${count}">Subj: ${geemails[count].subject}</p>
 							</div>
 						</div>
 					`
@@ -57,10 +90,19 @@
 					// message to reference message body in proper object
 					message.id = count;
 					document.querySelector('.messages').appendChild(message);
+					
+					let messages = document.getElementsByClassName('message');
+
+					for (var i = 0; i < messages.length; i += 1) {
+    				messages[i].addEventListener('click', openModal, false);	
+					}
+
 					count += 1;
 					document.querySelector('.count').textContent = count;
-				}, 15000);
-
+				}, 5000);
+				
+				// Event listener that closes modal when user clicks close button
+				closeButton.addEventListener('click', closeModal, false);
 
 
       };
@@ -68,6 +110,28 @@
 	</head>
 	<body>
 		<div class="container" id="main">
+			<div class="overlay"></div>
+			<!-- Modal -->
+			<div class="modal">
+					<div class="modal-message">
+						<div class="modal-header">
+							<h2 id="modal__subject"></h2>
+							<a href="#" class="btn-close">&times;</a>
+						</div>
+						<div class="modal__message__info">
+								<div id="modal__sender">
+										<p class="modal__sender"></p>
+								</div>
+								<div id="modal__date">
+									<p class="modal__date"></p>
+								</div>
+						</div>
+						<div class="modal-body">
+							<p id="modal__body"></p>
+						</div>
+					</div>
+			</div>
+				<!-- /Modal -->
 			<div class=top-header>
 				<img src="resources/img/gee-mail.png" alt="gee-mail logo" class="logo">
 				<p class="logo__type">Gee-mail</p>
