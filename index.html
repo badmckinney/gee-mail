@@ -4,8 +4,12 @@
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
       window.onload = function(){
-        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+				// reference variable to keep track of number of messages in the inbox
+				let count = 0;
+
+				// Loops ten times, creating a DOM element each time 
+				// populates data from each object in geemails array
+				// appends each element to DOM
 				for (var i = 0; i < geemails.length; i += 1) {
 					let message = document.createElement('div');
 					message.className = "message";
@@ -23,8 +27,42 @@
 						</div>
 					`
 					message.innerHTML = messageContent;
+					// message to reference message body in proper object
+					message.id = i;
 					document.querySelector('.messages').appendChild(message);
+					count += 1;
 				}
+
+				setInterval(() => {
+					// create seed data for new message
+					let data = getNewMessage();
+					// push to geemails array for later reference
+					geemails.push(data);
+					let message = document.createElement('div');
+					message.className = "message";
+					let messageContent = `
+						<div class="message__content">
+							<div class="date">
+								<p>${geemails[count].date.toLocaleDateString()}</p>
+							</div>
+							<div class="sender">
+								<p>${geemails[count].sender}</p>
+							</div>
+							<div class="subject">
+								<p>Subj: ${geemails[count].subject}</p>
+							</div>
+						</div>
+					`
+					message.innerHTML = messageContent;
+					// message to reference message body in proper object
+					message.id = count;
+					document.querySelector('.messages').appendChild(message);
+					count += 1;
+					document.querySelector('.count').textContent = count;
+				}, 15000);
+
+
+
       };
     </script>
 	</head>
