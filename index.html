@@ -5,7 +5,26 @@
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+				for (var i = 0; i < geemails.length; i += 1) {
+					let message = document.createElement('div');
+					message.className = "message";
+					let messageContent = `
+						<div class="message__content">
+							<div class="date">
+								<p>${geemails[i].date.toLocaleDateString()}</p>
+							</div>
+							<div class="sender">
+								<p>${geemails[i].sender}</p>
+							</div>
+							<div class="subject">
+								<p>Subj: ${geemails[i].subject}</p>
+							</div>
+						</div>
+					`
+					message.innerHTML = messageContent;
+					document.querySelector('.messages').appendChild(message);
+				}
       };
     </script>
 	</head>
@@ -32,13 +51,13 @@
 						</div>
 						<div class="messages">
 							<!-- messages here -->
-							<div class="message">
-								<!-- <div class="message__content">
+							<!-- <div class="message">
+								< <div class="message__content">
 										<p class="date">9/17/2016</p>
 										<p class="sender">Brad McKinney</p>
 										<p class="subject">Cheap online meds</p>
-								</div> -->
-							</div>
+								</div> 
+							</div> -->
 						</div>
 				</div>
 			</div>

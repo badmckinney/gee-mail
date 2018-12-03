@@ -159,9 +159,9 @@ p {
 }
 
 .message {
-    background: #f5f7f7;
+    background: #f0f0f0;
     height: 35px;
-    border-bottom: 1px solid #eceff1;
+    border-bottom: 1px solid #cacaca;
 }
 
 .message__content {
@@ -169,18 +169,25 @@ p {
     padding: 9px 0px 5px 20px;
 }
 
+.message__content div {
+    display: inline-block;
+}
+
 .message p {
     color: #424242;
 }
 
 .date {
-    margin-right: 80px;
+    width: 15%;
 }
 
 .sender {
-    margin-right: 160px;
+    width: 25%
 }
 
+.subject {
+    width: 45%;
+}
 
 
 
